@@ -1,30 +1,29 @@
 package org.coursera.ccopa.petagram.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
-import org.coursera.ccopa.petagram.adapters.PetAdapter;
-import org.coursera.ccopa.petagram.models.PetModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
 import org.coursera.ccopa.petagram.R;
+import org.coursera.ccopa.petagram.adapters.PageAdapter;
+import org.coursera.ccopa.petagram.fragments.PetFragment;
+import org.coursera.ccopa.petagram.fragments.ProfileFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private List<PetModel> petModelList;
-
-    private RecyclerView recyclerPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +54,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ViewPager2 viewPager2 = findViewById(R.id.viewPager2);
+        viewPager2.setAdapter(new PageAdapter(this, getFragments()));
+        final TabLayout tabLayout = findViewById(R.id.tabLayout);
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                switch (position + 1) {
+                    case 1:
+                        tab.setText(R.string.activity_main_tab_one);
+                        tab.setIcon(R.drawable.ic_pet_list);
+                        break;
+                    case 2:
+                        tab.setText(R.string.activity_main_tab_two);
+                        tab.setIcon(R.drawable.ic_pet_profile);
+                        break;
+                }
+            }
+        });
+        tabLayoutMediator.attach();
+
         FloatingActionButton floatingButtonMain = findViewById(R.id.floatingButtonMain);
         floatingButtonMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,26 +81,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, R.string.toast_camera_button, Toast.LENGTH_SHORT).show();
             }
         });
-
-        recyclerPet = findViewById(R.id.recyclerPet);
-        recyclerPet.setLayoutManager(new LinearLayoutManager(this));
-
-        generatePets();
-        initPetAdapter();
     }
 
-    private void initPetAdapter() {
-        PetAdapter petAdapter = new PetAdapter(petModelList);
-        recyclerPet.setAdapter(petAdapter);
-    }
-
-    private void generatePets() {
-        petModelList = new ArrayList<>();
-        petModelList.add(new PetModel(R.drawable.cat1, "Bianca", 3, false));
-        petModelList.add(new PetModel(R.drawable.cat2, "Garfield", 2, false));
-        petModelList.add(new PetModel(R.drawable.cat3, "Azrael", 5, false));
-        petModelList.add(new PetModel(R.drawable.dog1, "Blacky", 1, false));
-        petModelList.add(new PetModel(R.drawable.dog2, "Suchard", 2, false));
-        petModelList.add(new PetModel(R.drawable.dog3, "Kuroinu", 4, false));
+    private ArrayList<Fragment> getFragments() {
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(new PetFragment());
+        fragments.add(new ProfileFragment());
+        return fragments;
     }
 }

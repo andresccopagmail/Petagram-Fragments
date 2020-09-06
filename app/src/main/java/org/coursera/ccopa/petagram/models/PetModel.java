@@ -47,4 +47,5 @@ public class PetModel {
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
     }
+
 }

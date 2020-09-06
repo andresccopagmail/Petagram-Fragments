@@ -1,16 +1,16 @@
 package org.coursera.ccopa.petagram.activities;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
-
+import org.coursera.ccopa.petagram.R;
 import org.coursera.ccopa.petagram.adapters.PetAdapter;
 import org.coursera.ccopa.petagram.models.PetModel;
-import org.coursera.ccopa.petagram.R;
 
 import java.util.ArrayList;
 import java.util.List;

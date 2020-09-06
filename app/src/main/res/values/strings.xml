@@ -8,4 +8,7 @@
     <string name="activity_main_hint_email">Correo</string>
     <string name="activity_main_hint_message">Mensaje</string>
     <string name="activity_main_button_next">Enviar Comentario</string>
+    <string name="activity_main_tab_one">Mascotas</string>
+    <string name="activity_main_tab_two">Perfil</string>
+    <string name="my_pet_name">Jiffpoom</string>
 </resources>
