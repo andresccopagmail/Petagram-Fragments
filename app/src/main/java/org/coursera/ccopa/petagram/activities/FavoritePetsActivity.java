@@ -27,12 +27,7 @@ public class FavoritePetsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favorite_pets);
 
         Toolbar toolbarFavoritePets = findViewById(R.id.toolbarFavoritePets);
-        toolbarFavoritePets.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        toolbarFavoritePets.setNavigationOnClickListener(view -> finish());
 
         recyclerFavoritePets = findViewById(R.id.recyclerFavoritePets);
         recyclerFavoritePets.setLayoutManager(new LinearLayoutManager(this));

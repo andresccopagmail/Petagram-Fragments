@@ -16,11 +16,6 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
 
         Toolbar toolbarFavoritePets = findViewById(R.id.toolbarFavoritePets);
-        toolbarFavoritePets.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        toolbarFavoritePets.setNavigationOnClickListener(view -> finish());
     }
 }

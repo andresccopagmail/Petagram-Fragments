@@ -35,13 +35,10 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
         holder.imagePet.setImageResource(petModel.getImage());
         holder.textPetName.setText(petModel.getName());
         holder.textTotalRating.setText(String.valueOf(petModel.getRating()));
-        holder.imageRate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                petModel.setRating(petModel.getRating() + 1);
-                petModel.setFavorite(true);
-                notifyDataSetChanged();
-            }
+        holder.imageRate.setOnClickListener(view -> {
+            petModel.setRating(petModel.getRating() + 1);
+            petModel.setFavorite(true);
+            notifyDataSetChanged();
         });
     }
 

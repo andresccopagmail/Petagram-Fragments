@@ -2,11 +2,8 @@ package org.coursera.ccopa.petagram.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -31,56 +28,45 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbarMain = findViewById(R.id.toolbarMain);
-        toolbarMain.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent;
-                switch (menuItem.getItemId()) {
-                    case R.id.favorite:
-                        intent = new Intent(MainActivity.this, FavoritePetsActivity.class);
-                        startActivity(intent);
-                        return true;
-                    case R.id.contact:
-                        intent = new Intent(MainActivity.this, ContactActivity.class);
-                        startActivity(intent);
-                        return true;
-                    case R.id.about:
-                        intent = new Intent(MainActivity.this, AboutActivity.class);
-                        startActivity(intent);
-                        return true;
-                    default:
-                        return false;
-                }
+        toolbarMain.setOnMenuItemClickListener(menuItem -> {
+            Intent intent;
+            switch (menuItem.getItemId()) {
+                case R.id.favorite:
+                    intent = new Intent(MainActivity.this, FavoritePetsActivity.class);
+                    startActivity(intent);
+                    return true;
+                case R.id.contact:
+                    intent = new Intent(MainActivity.this, ContactActivity.class);
+                    startActivity(intent);
+                    return true;
+                case R.id.about:
+                    intent = new Intent(MainActivity.this, AboutActivity.class);
+                    startActivity(intent);
+                    return true;
+                default:
+                    return false;
             }
         });
 
         ViewPager2 viewPager2 = findViewById(R.id.viewPager2);
         viewPager2.setAdapter(new PageAdapter(this, getFragments()));
         final TabLayout tabLayout = findViewById(R.id.tabLayout);
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position + 1) {
-                    case 1:
-                        tab.setText(R.string.activity_main_tab_one);
-                        tab.setIcon(R.drawable.ic_pet_list);
-                        break;
-                    case 2:
-                        tab.setText(R.string.activity_main_tab_two);
-                        tab.setIcon(R.drawable.ic_pet_profile);
-                        break;
-                }
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
+            switch (position + 1) {
+                case 1:
+                    tab.setText(R.string.activity_main_tab_one);
+                    tab.setIcon(R.drawable.ic_pet_list);
+                    break;
+                case 2:
+                    tab.setText(R.string.activity_main_tab_two);
+                    tab.setIcon(R.drawable.ic_pet_profile);
+                    break;
             }
         });
         tabLayoutMediator.attach();
 
         FloatingActionButton floatingButtonMain = findViewById(R.id.floatingButtonMain);
-        floatingButtonMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, R.string.toast_camera_button, Toast.LENGTH_SHORT).show();
-            }
-        });
+        floatingButtonMain.setOnClickListener(view -> Toast.makeText(MainActivity.this, R.string.toast_camera_button, Toast.LENGTH_SHORT).show());
     }
 
     private ArrayList<Fragment> getFragments() {

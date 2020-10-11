@@ -11,4 +11,5 @@
     <string name="activity_main_tab_one">Mascotas</string>
     <string name="activity_main_tab_two">Perfil</string>
     <string name="my_pet_name">Jiffpoom</string>
+    <string name="about_me">Hola, soy A. Junior!\n\nEste es mi trabajo PETAGRAM en donde he tratado de incorporar las mejores prácticas. Chécalo!\n\nHasta la próxima!</string>
 </resources>
